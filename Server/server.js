@@ -8,6 +8,8 @@ const db = require('./models/userModel.js');
 const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
 
+const characterRoute = require('./routes/characterRoutes');
+
 const PORT = 3000;
 
 const app = express();
@@ -25,28 +27,40 @@ app.set('view engine', 'ejs');
  */
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 
+// app.use('/*', function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+//   );
+//   next();
+// });
+
 app.get('/', (req, res) => {
-  /**
-   * Since we set `ejs` to be the view engine above, `res.render` will parse the
-   * template page we pass it (in this case 'client/secret.ejs') as ejs and produce
-   * a string of proper HTML which will be sent to the client!
-   */
-
-  res.render('./../client/index.ejs');
+  // res.render('./../client/index.ejs');
+  res.sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-app.get('/signup', (req, res) => {
-  res.render('./../client/signup', { error: null });
-});
+// app.get('/signup', (req, res) => {
+//   // res.render('./../client/signup', { error: null });
+// });
 
 app.post('/signup', userController.createUser, (req, res) => {
   // console.log('I am here');
+  console.log('backend');
+
+  if (res.locals.success) return res.sendStatus(200);
+  return res.sendStatus(400);
+  // res.status(200).json(JSON.stringify({ success: res.locals.success }));
 
   // if (res.locals.success) res.render('./../Client/characterCreation.ejs');
-  if (res.locals.success) res.redirect('/');
-  else res.render('./../Client/signup.ejs', { error: res.locals.error });
+  // if (res.locals.success) res.redirect('/');
+  // else res.render('./../Client/signup.ejs', { error: res.locals.error });
 });
 
 app.post(
@@ -55,14 +69,17 @@ app.post(
   cookieController.setSSIDCookie,
   (req, res) => {
     console.log('signing in');
+
+    if (res.locals.success) return res.sendStatus(200);
+    return res.sendStatus(400);
     // console.log(req.cookies.ssid_dnd);
 
-    if (res.locals.success) res.redirect('/characterCreation');
-    else res.render('./../Client/signup.ejs', { error: res.locals.error });
+    // if (res.locals.success) res.redirect('/characterCreation');
+    // else res.render('./../Client/signup.ejs', { error: res.locals.error });
   }
 );
 
-app.get('/characterCreation', (req, res) => {
+app.get('/characters/creation', (req, res) => {
   res.render('./../client/characterCreation', { error: null });
 });
 
