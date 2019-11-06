@@ -1,0 +1,259 @@
+CLASS
+
+fetch('https://api.open5e.com/classes/')
+    .then(res => res.json())
+    .then(json => {
+      console.log(json.results[0].name);
+
+      for (let i = 0; i < json.results.length; i++) {
+        console.log('CLASS');
+        console.log('=======================================');
+        console.log('=======================================');
+        console.log(json.results[i].name);
+        console.log(json.results[i].desc);
+        console.log(json.results[i].hit_dice);
+        console.log(json.results[i].hp_at_1st_level);
+        console.log(json.results[i].hp_at_higher_levels);
+        console.log(json.results[i].prof_armor);
+        console.log(json.results[i].prof_weapons);
+        console.log(json.results[i].prof_tools);
+        console.log(json.results[i].prof_saving_throws);
+        console.log(json.results[i].prof_skills);
+        console.log(json.results[i].equipment);
+        console.log(json.results[i].spellcasting_ability);
+        console.log('=======================================');
+        console.log('=======================================');
+        // values = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'];
+        values = [
+          json.results[i].name,
+          json.results[i].desc,
+          json.results[i].hit_dice,
+          json.results[i].hp_at_1st_level,
+          json.results[i].hp_at_higher_levels,
+          json.results[i].prof_armor,
+          json.results[i].prof_weapons,
+          json.results[i].prof_tools,
+          json.results[i].prof_saving_throws,
+          json.results[i].prof_skills,
+          json.results[i].equipment,
+          json.results[i].spellcasting_ability
+        ];
+
+        db.query(
+          // 'INSERT INTO "Class" ("class_name", "class_description", "hit_dice", "hp_first_level", "hp_level_up", "prof_armor", "prof_weapons", "prof_tools", "prof_saving_throws", "prof_skills", "equipment" , "spellcasting_ability") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+          'INSERT INTO "Class" ("class_name", "class_description", "hit_dice", "hp_first_level", "hp_level_up", "prof_armor", "prof_weapons", "prof_tools", "prof_saving_throws", "prof_skills", "equipment", "spellcasting_ability" ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+          values,
+          (err, response) => {
+            if (err) {
+              res.locals.error = err;
+              res.locals.success = false;
+              // return next();
+            }
+
+            // console.dir(response);
+            console.log(response);
+
+            res.locals.success = true;
+
+            // return next();
+          }
+        );
+      }
+    });
+
+==============
+==================
+==================
+=================
+=============
+===============
+RACE
+console.log('RACE');
+        console.log('=======================================');
+        console.log('=======================================');
+        console.log(json.results[i].name);
+        console.log(json.results[i].desc);
+        console.log(json.results[i].asi_desc);
+        console.log(json.results[i].age);
+        console.log(json.results[i].alignment);
+        console.log(json.results[i].size);
+        console.log(json.results[i].speed.walk);
+        console.log(json.results[i].speed_desc);
+        console.log(json.results[i].languages);
+        console.log(json.results[i].vision);
+        console.log(json.results[i].traits);
+
+        console.log('=======================================');
+        console.log('=======================================');
+        // values = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'];
+        values = [
+          json.results[i].name,
+          json.results[i].desc,
+          json.results[i].asi_desc,
+          json.results[i].age,
+          json.results[i].alignment,
+          json.results[i].size,
+          json.results[i].speed.walk,
+          json.results[i].speed_desc,
+          json.results[i].languages,
+          json.results[i].vision,
+          json.results[i].traits
+        ];
+
+        db.query(
+          // 'INSERT INTO "Class" ("class_name", "class_description", "hit_dice", "hp_first_level", "hp_level_up", "prof_armor", "prof_weapons", "prof_tools", "prof_saving_throws", "prof_skills", "equipment" , "spellcasting_ability") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+          'INSERT INTO "Race" ("race_name", "race_description", "ability_increase_description", "age", "alignment", "size", "speed", "speed_description", "languages", "vision", "traits")  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)',
+          values,
+          (err, response) => {
+            if (err) {
+              res.locals.error = err;
+              res.locals.success = false;
+              // return next();
+            }
+
+            // console.dir(response);
+            console.log(response);
+
+            res.locals.success = true;
+
+            // return next();
+          }
+        );
+
+
+==============
+==================
+==================
+=================
+=============
+===============
+
+SPELLS AND SPELLS_CLASSES
+
+// fetch api
+  // parse through
+  // take what need
+  // save in new object
+  // store key value in relational database
+
+  // spells
+  // fetch('https://api.open5e.com/spells/')
+  //   .then(res => res.json())
+  //   .then(json => {
+  //     console.log(json.results);
+  //   });
+
+  // fetch('https://api.open5e.com/spells/')
+  // fetch('https://api.open5e.com/spells/?page=2')
+  // fetch('https://api.open5e.com/spells/?page=3')
+  // fetch('https://api.open5e.com/spells/?page=4')
+  // fetch('https://api.open5e.com/spells/?page=5')
+  // fetch('https://api.open5e.com/spells/?page=6')
+  fetch('https://api.open5e.com/spells/?page=7')
+    .then(res => res.json())
+    .then(async json => {
+      // console.log(json.results[0].name);
+
+      // for (let i = 0; i < json.results.length; i++) {
+      for (let spell of json.results) {
+        // console.log('Spells');
+        // console.log('=======================================');
+        // console.log('=======================================');
+        // console.log(json.results[i].name);
+        // console.log(json.results[i].desc);
+        // console.log(json.results[i].higher_level);
+        // console.log(json.results[i].range);
+        // console.log(json.results[i].components);
+        // console.log(json.results[i].material);
+        // console.log(json.results[i].ritual);
+        // console.log(json.results[i].duration);
+        // console.log(json.results[i].concentration);
+        // console.log(json.results[i].casting_time);
+        // console.log(json.results[i].level_int);
+        // console.log(json.results[i].school);
+        // console.log(json.results[i].archetype);
+        // console.log(json.results[i].circles);
+
+        // console.log('=======================================');
+        // console.log('=======================================');
+        // values = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'];
+        values = [
+          spell.name,
+          spell.desc,
+          spell.higher_level,
+          spell.range,
+          spell.components,
+          spell.material,
+          spell.ritual,
+          spell.duration,
+          spell.concentration,
+          spell.casting_time,
+          spell.level_int,
+          spell.school,
+          spell.archetype,
+          spell.circles
+        ];
+
+        await db.query(
+          // 'INSERT INTO "Class" ("class_name", "class_description", "hit_dice", "hp_first_level", "hp_level_up", "prof_armor", "prof_weapons", "prof_tools", "prof_saving_throws", "prof_skills", "equipment" , "spellcasting_ability") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)',
+          'INSERT INTO "Spells" ("spell_name", "spell_description", "spell_higher_level", "range", "components", "material", "ritual", "duration", "concentration", "casting_time", "level", "school", "archetype", "circles")  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING spell_id',
+          values,
+          async (err, response) => {
+            if (err) {
+              res.locals.error = err;
+              res.locals.success = false;
+              // return next();
+            }
+
+            // console.dir(response);
+            // console.log('======');
+            // console.log('======');
+            // console.log('======');
+            // console.log(json.results[0].dnd_class);
+            // console.log(response.rows[0].spell_id);
+
+            const arr = spell.dnd_class.split(', ');
+            // console.log(arr);
+
+            const classes = {
+              Bard: 1,
+              Cleric: 2,
+              Warlock: 3,
+              Wizard: 4,
+              Fighter: 5,
+              Paladin: 6,
+              Druid: 7,
+              Monk: 8,
+              Rogue: 9,
+              Ranger: 10,
+              Sorcerer: 11,
+              Barbarian: 12
+            };
+            await console.log('success1');
+            // console.log(classes[arr[1]]);
+
+            for (let elem of arr) {
+              const classSpell = [response.rows[0].spell_id, classes[elem]];
+              await db.query(
+                'INSERT INTO "Spells_Classes" ("spell_id", "class_id") VALUES($1, $2)',
+                classSpell,
+                async (err, resp) => {
+                  if (err) {
+                    res.locals.error = err;
+                    res.locals.success = false;
+                    // return next();
+                  }
+                  await console.log('success2');
+                }
+              );
+            }
+
+            res.locals.success = true;
+
+            // return next();
+          }
+        );
+      }
+
+      // }
+    });
