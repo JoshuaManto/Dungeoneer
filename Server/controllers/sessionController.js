@@ -1,4 +1,4 @@
-const db = require('../models/userModel.js');
+const db = require('../models/Model.js');
 
 const sessionController = {};
 
