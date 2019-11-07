@@ -11,11 +11,9 @@ router.get(
   // res.status(200).json([...res.locals.characters])
 );
 
-router.get(
-  '/',
-  classesController.getAllClasses,
-  (req, res) => console.log('in router get all classes')
-  // res.status(200).json([...res.locals.characters])
-);
+router.get('/', classesController.getAllClasses, (req, res) => {
+  console.log('in router get all classes');
+  res.status(200).json([...res.locals.classes]);
+});
 
 module.exports = router;
