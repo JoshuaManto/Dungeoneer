@@ -10,6 +10,29 @@ async function getAllRaces(req, res, next) {
 
   const query = 'SELECT * FROM "Race"';
 
+  // try {
+  //   const res = await db.query(query);
+  //   res.locals.races = res.rows;
+  //   res.locals.success = true;
+  //   next();
+  // } catch (e) {
+  //   res.locals.error = e;
+  //   res.locals.success = false;
+  //   next();
+  // }
+
+  // db.query(query)
+  //   .then(res => {
+  //     res.locals.races = res.rows;
+  //     res.locals.success = true;
+  //     next();
+  //   })
+  //   .catch(e => {
+  //     res.locals.error = e;
+  //     res.locals.success = false;
+  //     next();
+  //   });
+
   await db.query(query, (err, response) => {
     console.log(response.rows);
     if (err) {
