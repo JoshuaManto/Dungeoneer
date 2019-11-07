@@ -8,9 +8,10 @@ const db = require('./models/Model.js');
 const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
 
-const characterRoutes = require('./routes/characterRoutes');
-const classesRoutes = require('./routes/classesRouter');
-const racesRoutes = require('./routes/racesRouter');
+const characterRouter = require('./routes/characterRouter');
+const classesRouter = require('./routes/classesRouter');
+const racesRouter = require('./routes/racesRouter');
+const alignmentRouter = require('./routes/alignmentRouter');
 
 const PORT = 3000;
 
@@ -82,9 +83,10 @@ app.post(
   }
 );
 
-app.use('/characters', characterRoutes);
-app.use('/classes', classesRoutes);
-app.use('/races', racesRoutes);
+app.use('/characters', characterRouter);
+app.use('/classes', classesRouter);
+app.use('/races', racesRouter);
+app.use('/alignments', alignmentRouter);
 
 /**
  * 404 handler
