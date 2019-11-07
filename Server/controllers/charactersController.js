@@ -104,12 +104,13 @@ async function getAllCharactersForSinglePlayer(req, res, next) {
   console.log(req.body);
   console.log('getting character of a user');
 
-  const query = '';
-  const values = [];
+  const query =
+    'SELECT c.* FROM "Users_Characters" uc LEFT OUTER JOIN "users" u ON uc."user_id" = u."user_id" LEFT OUTER JOIN "Characters" c ON uc."character_id" = c."character_id" WHERE u."user_id" = $1';
+  const values = [req.body.user_id];
 
   db.query(query, values, (err, response) => {
     console.log(response);
-    console.log(response.rows);
+    console.log('CHARACTERS: ', response.rows);
     if (err) {
       res.locals.error = err;
       res.locals.success = false;
