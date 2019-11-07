@@ -8,10 +8,13 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 
-import Login from './components/login';
-import Signup from './components/signup';
-import Home from './components/home';
-import CharacterCreation from './components/characterCreation';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Home from './components/Home';
+import Characters from './components/Characters/Characters';
+import Character from './components/Characters/Character/Character';
+
+import CharacterCreation from './components/CharacterCreation/CharacterCreation';
 
 class App extends Component {
   constructor(props) {
@@ -104,8 +107,8 @@ class App extends Component {
         console.log('frontend');
         console.log(res);
         console.log(res.data);
-        if (res.status === 200)
-          return this.props.history.push('/characters/creation');
+        console.log(res.data.user_id);
+        if (res.status === 200) return this.props.history.push('/characters');
         return this.props.history.push('/login');
       })
       .catch(err => {
@@ -114,7 +117,7 @@ class App extends Component {
       })
       .finally(() => {
         this.setState({
-          username: '',
+          // username: '',
           password: ''
         });
       });
@@ -158,6 +161,7 @@ class App extends Component {
             )}
             // component={Login}
           />
+          <Route exact path="/characters" component={Characters}></Route>
           <Route
             exact
             path="/characters/creation"
