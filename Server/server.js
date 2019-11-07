@@ -3,12 +3,14 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fetch = require('node-fetch');
-const db = require('./models/userModel.js');
+const db = require('./models/Model.js');
 
 const userController = require('./controllers/userController.js');
 const cookieController = require('./controllers/cookieController.js');
 
-const characterRoute = require('./routes/characterRoutes');
+const characterRoutes = require('./routes/characterRoutes');
+const classesRoutes = require('./routes/classesRouter');
+const racesRoutes = require('./routes/racesRouter');
 
 const PORT = 3000;
 
@@ -70,7 +72,8 @@ app.post(
   (req, res) => {
     console.log('signing in');
 
-    if (res.locals.success) return res.sendStatus(200);
+    if (res.locals.success)
+      return res.status(200).json({ user_id: res.locals.id });
     return res.sendStatus(400);
     // console.log(req.cookies.ssid_dnd);
 
@@ -79,9 +82,9 @@ app.post(
   }
 );
 
-app.get('/characters/creation', (req, res) => {
-  res.render('./../client/characterCreation', { error: null });
-});
+app.use('/characters', characterRoutes);
+app.use('/classes', classesRoutes);
+app.use('/races', racesRoutes);
 
 /**
  * 404 handler
