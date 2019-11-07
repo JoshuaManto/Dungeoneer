@@ -1,4 +1,4 @@
-const db = require('../models/userModel.js');
+const db = require('../models/Model.js');
 const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
 
@@ -45,7 +45,7 @@ async function createUser(req, res, next) {
       }
 
       // console.dir(response);
-      // console.log(response);
+      console.log(response);
 
       res.locals.success = true;
 
@@ -74,7 +74,7 @@ async function verifyUser(req, res, next) {
           return next();
         }
 
-        // console.log(response);
+        console.log(response.rows);
         if (response.rows.length > 0) {
           bcrypt.compare(password, response.rows[0].password, function(
             err,
@@ -84,6 +84,7 @@ async function verifyUser(req, res, next) {
 
             if (isMatch) {
               res.locals.id = response.rows[0].user_id;
+              res.locals.username = response.rows[0].username;
               res.locals.success = true;
               return next();
             } else {
