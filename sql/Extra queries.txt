@@ -1,0 +1,98 @@
+-- INSERT INTO "Class" ("class_name", "class_description", "hit_dice", "hp_first_level", "hp_level_up", "prof_armor", "prof_weapons", "prof_tools", "prof_saving_throws", "prof_skills", "equipment", "spellcasting_ability" ) 
+-- VALUES ('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10', '$11', '$12')
+
+-- INSERT INTO "Race" ("race_name" , "race_description" , "ability_increase_description" , "age" , "alignment" , "size" , "speed" , "speed_description" , "languages" , "vision" , "traits") 
+-- VALUES ('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10', '$11')
+
+-- SELECT * 
+-- FROM "Race"
+-- WHERE race_name = 'Human'
+
+ SELECT *
+ FROM "Spells"
+--   WHERE "spell_id" = 192
+--   WHERE "spell_name" = 'Zone of Truth'
+ 
+--  SELECT MAX("spell_id")
+-- FROM "Spells"
+
+CREATE TABLE "Spells" (
+	"spell_id" serial NOT NULL,
+	"spell_name" VARCHAR(255) NOT NULL,
+	"spell_description" TEXT NOT NULL,
+	"spell_higher_level" VARCHAR(255) NOT NULL,
+	"range" VARCHAR(255) NOT NULL,
+	"components" VARCHAR(255) NOT NULL,
+	"material" VARCHAR(255) NOT NULL,
+	"ritual" VARCHAR(255) NOT NULL,
+	"duration" VARCHAR(255) NOT NULL,
+	"concentration" VARCHAR(255) NOT NULL,
+	"casting_time" VARCHAR(255) NOT NULL,
+	"level" integer NOT NULL,
+	"school" VARCHAR(255) NOT NULL,
+	"archetype" VARCHAR(255) NOT NULL,
+	"circles" VARCHAR(255) NOT NULL,
+	CONSTRAINT "Spells_pk" PRIMARY KEY ("spell_id")
+)
+
+-- INSERT INTO "Spells" ("spell_name", "spell_description", "spell_higher_level", "range", "components", "material", "ritual", "duration", "concentration", "casting_time", "level", "school", "archetype", "circles")
+-- VALUES ('$1', '$2', '$3', '$4', '$5', '$6', '$7', '$8', '$9', '$10', 1, '$11', '$12', '$13', '$14' )
+
+
+-- CREATE TABLE "Spells_Classes" (
+-- 	"spell_class_id" serial NOT NULL,
+-- 	"spell_id" integer NOT NULL,
+-- 	"class_id" integer NOT NULL,
+-- 	CONSTRAINT "Spells_Classes_pk" PRIMARY KEY ("spell_class_id")
+-- )
+
+CREATE TABLE "Class" (
+	"class_id" serial NOT NULL,
+	"class_name" VARCHAR(255) NOT NULL,
+	"class_description" TEXT NOT NULL,
+	"hit_dice" VARCHAR(255) NOT NULL,
+	"hp_first_level" VARCHAR(255) NOT NULL,
+	"hp_level_up" VARCHAR(255) NOT NULL,
+	"prof_armor" VARCHAR(255) NOT NULL,
+	"prof_weapons" VARCHAR(255) NOT NULL,
+	"prof_tools" VARCHAR(255) NOT NULL,
+	"prof_saving_throws" VARCHAR(255) NOT NULL,
+	"prof_skills" VARCHAR(255) NOT NULL,
+	"equipment" TEXT NOT NULL,
+	"spellcasting_ability" VARCHAR(255) NOT NULL,
+	CONSTRAINT "Class_pk" PRIMARY KEY ("class_id")
+)
+
+SELECT *
+FROM "users"
+
+-- CREATE TABLE "users" (
+-- 	"user_id" serial NOT NULL,
+-- 	"username" VARCHAR(255) NOT NULL,
+-- 	"password" VARCHAR(255) NOT NULL,
+-- 	CONSTRAINT "users_pk" PRIMARY KEY ("user_id")
+-- )
+
+-- DROP TABLE "users"
+
+-- SELECT *
+--    FROM "Spells_Classes"
+--     WHERE "spell_id" = 302
+-- DELETE 
+-- FROM "Spells_Classes"
+-- WHERE "spell_class_id" = 1
+
+--    DROP TABLE "Spells_Classes"
+
+-- INSERT INTO "Spells_Classes" ("spell_id", "class_id")
+--  VALUES('1', '1')
+
+--    CREATE TABLE "Spells_Classes" (
+--   	"spell_class_id" serial NOT NULL,
+--   	"spell_id" integer NOT NULL,
+--   	"class_id" integer NOT NULL,
+--    	CONSTRAINT "Spells_Classes_pk" PRIMARY KEY ("spell_class_id")
+--   )
+
+-- SELECT *
+-- FROM "Class"
