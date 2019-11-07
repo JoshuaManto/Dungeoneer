@@ -96,3 +96,11 @@ FROM "users"
 
 -- SELECT *
 -- FROM "Class"
+
+SELECT c.*
+FROM "Users_Characters" uc 
+LEFT OUTER JOIN "users" u
+ON uc."user_id" = u."user_id"
+LEFT OUTER JOIN "Characters" c
+ON uc."character_id" = c."character_id"
+WHERE u."user_id" = 1
